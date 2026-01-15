@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BOSQUE ESCUELA</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header parallax">
+    <!-- Overlay con degradado animado -->
+    <div class="header_overlay gradient-bg"></div>
+
+    <!-- Contenedor principal  -->
+    <div class="header_item-container scroll-reveal">
+      <h1>BOSQUE ESCUELA</h1>
+      <h2>¿Qué es un bosque escuela?</h2>
+      <p>
+        Es un modelo educativo que utiliza el entorno natural, como un bosque, como aula para que niños y jóvenes aprendan de forma vivencial sobre el medio ambiente, la cultura forestal, y desarrollen habilidades sociales y de confianza, promoviendo la conciencia ecológica a través de actividades prácticas, juego y exploración en la naturaleza.
+      </p>
+    </div>
+
+    <!-- Overlay para pestañas -->
+    <div class="tab-overlay" id="tabOverlay">
+      <div class="tab-content">
+        <button class="close-btn" id="closeBtn">❌</button>
+        <div id="tabContent"></div>
+      </div>
+    </div>
+
+    <!-- Contenedor de partículas flotantes -->
+    <div class="particles" id="particles"></div>
+  </header>
+
+  <!-- NAV con secciones y emojis -->
+  <nav class="nav">
+    <div class="nav_ul-container">
+      <ul class="nav_ul">
+        <!-- Árboles forestales -->
+        <li class="nav_section-title">🌲 Árboles forestales</li>
+        <li class="nav_item"><button class="nav_link" data-tab="PINO">🌲 Pino</button></li>
+        <li class="nav_item"><button class="nav_link" data-tab="AYACAHUITE">🌳 Ayacahuite</button></li>
+
+        <!-- Frutales -->
+        <li class="nav_section-title">🍎 Frutales</li>
+        <li class="nav_item"><button class="nav_link" data-tab="DURAZNO">🍑 Durazno</button></li>
+        <li class="nav_item"><button class="nav_link" data-tab="CHAVACANO">🍊 Chavacano</button></li>
+        <li class="nav_item"><button class="nav_link" data-tab="PERA">🍐 Pera</button></li>
+        <li class="nav_item"><button class="nav_link" data-tab="MANZANA">🍎 Manzana</button></li>
+
+        <!-- Maderables -->
+        <li class="nav_section-title">🪵 Maderables</li>
+        <li class="nav_item"><button class="nav_link" data-tab="AHUEHUETE">🌳 Ahuehuete</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Botón flotante  -->
+  <button class="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">⬆</button>
+
+  <script>
+    const overlay = document.getElementById('tabOverlay');
+    const content = document.getElementById('tabContent');
+    const tabs = document.querySelectorAll('.nav_link');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Información  de cada pestaña con imágenes
+    const dataTabs = {
+      PINO: {
+        titulo: "🌲 Pino",
+        texto: `
+          <img src="imagenes/pino.jpg" alt="Pino" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Pino</strong> (Pinus spp.)</p>
+          <h4>Crecimiento</h4>
+          <p>Rápido en general, pero los primeros 4 años son lentos (10–50 cm/año). 
+          Puede alcanzar entre 50–80 metros en unos 20 años.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Pleno sol</li>
+            <li>🌱 Suelo arenoso o franco (riesgo inicial frecuente)</li>
+            <li>⚠️ Evitar trasplantes: riesgo de dañar raíces</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Producción de madera, resina y papel. También se utiliza en reforestación.</p>
+        `
+      },
+      AYACAHUITE: {
+        titulo: "🌳 Ayacahuite",
+        texto: `
+          <img src="imagenes/ayacahuite.webp" alt="Ayacahuite" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Ayacahuite</strong> (Pinus ayacahuite)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol de gran altura, puede superar los 30 metros. 
+          Su crecimiento es moderado en los primeros años.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Prefiere pleno sol</li>
+            <li>🌱 Suelos profundos y bien drenados</li>
+            <li>💧 Riego moderado en etapas iniciales</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Madera ligera utilizada en carpintería y construcción.</p>
+        `
+      },
+      DURAZNO: {
+        titulo: "🍑 Durazno",
+        texto: `
+          <img src="imagenes/durazno.jpg" alt="Durazno" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Durazno</strong> (Prunus persica)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol de tamaño medio (4–6 metros). 
+          Produce frutos a partir del tercer año.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Necesita pleno sol</li>
+            <li>💧 Riego moderado y constante</li>
+            <li>✂️ Podas regulares para mejorar la producción</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Fruto comestible muy apreciado en fresco y repostería.</p>
+        `
+      },
+      CHAVACANO: {
+        titulo: "🍊 Chavacano",
+        texto: `
+          <img src="imagenes/chavacano.jpg" alt="Chavacano" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Chavacano</strong> (Prunus armeniaca)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol pequeño a mediano, alcanza entre 3–5 metros. 
+          Fructifica temprano, desde el segundo año.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Pleno sol</li>
+            <li>🌱 Suelo fértil y bien drenado</li>
+            <li>💧 Riego frecuente en temporada seca</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Fruto dulce consumido fresco, en mermeladas y conservas.</p>
+        `
+      },
+      PERA: {
+        titulo: "🍐 Pera",
+        texto: `
+          <img src="imagenes/pera.webp" alt="Pera" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Pera</strong> (Pyrus communis)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol de tamaño medio (5–10 metros). 
+          Produce frutos de alta calidad a partir del cuarto año.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Prefiere sol directo</li>
+            <li>🌱 Suelo fértil y húmedo</li>
+            <li>✂️ Podas para mejorar la aireación</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Fruto comestible, utilizado en jugos, repostería y consumo fresco.</p>
+        `
+      },
+            MANZANA: {
+        titulo: "🍎 Manzana",
+        texto: `
+          <img src="imagenes/manzana.webp" alt="Manzana" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Manzana</strong> (Malus domestica)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol de tamaño medio (4–8 metros). 
+          Produce frutos a partir del tercer o cuarto año.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Necesita sol directo</li>
+            <li>💧 Riego moderado</li>
+            <li>✂️ Podas regulares para mejorar la producción</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Fruto comestible, ampliamente consumido en fresco, jugos y repostería.</p>
+        `
+      },
+      AHUEHUETE: {
+        titulo: "🌳 Ahuehuete",
+        texto: `
+          <img src="imagenes/ahuehuete.webp" alt="Ahuehuete" class="tab-image">
+          <h4>Nombre científico</h4>
+          <p><strong>Ahuehuete</strong> (Taxodium mucronatum)</p>
+          <h4>Crecimiento</h4>
+          <p>Árbol de gran tamaño, puede superar los 40 metros. 
+          Es longevo y puede vivir cientos de años.</p>
+          <h4>Cuidados</h4>
+          <ul>
+            <li>🌞 Prefiere sol directo</li>
+            <li>💧 Necesita abundante agua, ideal cerca de ríos o lagos</li>
+            <li>🌱 Suelo profundo y fértil</li>
+          </ul>
+          <h4>Usos</h4>
+          <p>Árbol emblemático de México, utilizado en ornato y como símbolo cultural.</p>
+        `
+      }
+    };
+
+    // Evento para abrir pestañas con información
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const info = dataTabs[tab.dataset.tab];
+        content.innerHTML = `
+          <h3>${info.titulo}</h3>
+          <p>${info.texto}</p>
+        `;
+        overlay.classList.add('active');
+        tab.classList.add('active');
+      });
+    });
+
+    // Botón de cierre
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('active');
+      tabs.forEach(tab => tab.classList.remove('active'));
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    window.addEventListener('scroll', () => {
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100){
+          el.classList.add('revealed');
+        }
+      });
+    });
+
+    // Parallax efecto en header
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header.parallax');
+      let scrollY = window.scrollY;
+      header.style.backgroundPositionY = `${scrollY * 0.4}px`;
+    });
+
+    // Generar partículas flotantes (luciérnagas variadas)
+    const particlesContainer = document.getElementById('particles');
+    const colors = ['#ffd700', '#fff176', '#ffe082'];
+    for(let i=0; i<25; i++){
+      const particle = document.createElement('span');
+      particle.classList.add('particle');
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = (Math.random() * 10) + 's';
+      particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]} 0%, transparent 70%)`;
+      particlesContainer.appendChild(particle);
+    }
+
+    // Cursor personalizado con halo pulsante
+    const cursor = document.createElement('div');
+    cursor.classList.add('cursor');
+    document.body.appendChild(cursor);
+
+    window.addEventListener('mousemove', e => {
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.left = e.clientX + 'px';
+    });
+
+    const interactiveElements = document.querySelectorAll('button, a, .nav_link, .close-btn');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+    });
+  </script>
+</body>
+</html>

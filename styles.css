@@ -469,3 +469,49 @@ h2 {
   box-shadow: 0 0 40px rgba(255,215,0,0.95);
   filter: brightness(1.1);
 }
+/* ===== RESPONSIVIDAD ===== */
+
+/* Tablets (pantallas medianas) */
+@media (max-width: 1024px) {
+  /* Títulos */
+  h1 { font-size: 120px; }
+  h2 { font-size: 60px; }
+  .header_item-container p { font-size: 28px; line-height: 1.6; }
+
+  /* Navegación */
+  .nav_link { font-size: 30px; padding: 10px 20px; }
+  .nav_section-title { font-size: 40px; }
+
+  /* Contenido de pestañas */
+  .tab-content { padding: 40px; max-width: 90%; }
+  .tab-content h3 { font-size: 60px; }
+  .tab-content h4 { font-size: 30px; }
+  .tab-content p, .tab-content ul li { font-size: 24px; }
+}
+
+/* Móviles (pantallas pequeñas) */
+@media (max-width: 600px) {
+  /* Títulos */
+  h1 { font-size: 70px; }
+  h2 { font-size: 40px; }
+  .header_item-container p { font-size: 20px; line-height: 1.4; }
+
+  /* Navegación */
+  .nav_link { font-size: 22px; padding: 8px 14px; }
+  .nav_section-title { font-size: 28px; }
+
+  /* Contenido de pestañas */
+  .tab-content { padding: 25px; max-width: 95%; }
+  .tab-content h3 { font-size: 40px; }
+  .tab-content h4 { font-size: 24px; }
+  .tab-content p, .tab-content ul li { font-size: 18px; }
+
+  /* Imágenes */
+  .tab-image { border-radius: 12px; margin: 15px 0; }
+}
+
+/* Overlay scroll en dispositivos pequeños */
+.tab-overlay {
+  overflow-y: auto;
+}
+

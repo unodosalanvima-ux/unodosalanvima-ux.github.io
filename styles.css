@@ -28,7 +28,7 @@ body {
 .header {
   overflow: hidden;
   height: 100vh;
-  background-image: url("pexels-alex-ning-523843601-35486884.jpg");
+  background-image: url("imagenes/pexels-alex-ning-523843601-35486884.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -384,6 +384,7 @@ h2 {
 .tab-overlay {
   overflow-y: auto;
 }
+
 
 
 
